@@ -15,7 +15,7 @@ const CountryCard = ({country}) => {
           <li key={lang}>{lang}</li>
         ))}
       </ul>
-      <img src={country.flags.png} style={{width: '200px', height: 'auto'}} alt="" />
+      <img src={country.flags.png} style={{width: '200px', height: 'auto', border: '1px solid black'}} alt="" />
       <Weather lat={lat} lng={lng} city={country.capital} />
     </div>
   )

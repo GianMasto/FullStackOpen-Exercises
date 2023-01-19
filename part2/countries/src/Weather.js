@@ -17,7 +17,7 @@ const Weather = ({lat, lng, city}) => {
 
   return (
     <div>
-      <h3>Weather in {city}</h3>
+      <h3>Temperature in {city}</h3>
       {weather.current_weather
         ? <p>{weather.current_weather.temperature}&deg;C</p>
         : <p>Loading weather...</p>
