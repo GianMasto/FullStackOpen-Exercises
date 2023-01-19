@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 import Persons from './Persons'
 import Filter from './Filter'
@@ -6,10 +7,6 @@ import AddPerson from './AddPerson'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456', id: 1 },
-    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
-    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
-    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 0 }
   ]) 
 
   const [formValues, setFormValues] = useState({
@@ -18,6 +15,16 @@ const App = () => {
   })
 
   const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const {data} = await axios.get('http://localhost:3001/persons')
+      setPersons(data)
+    }
+    
+    fetchData()
+      .catch(console.error)
+  }, [])
 
 
   const onSearchChange = (e) => {
@@ -36,7 +43,7 @@ const App = () => {
     setPersons(persons.concat({
       name: formValues.name,
       number: formValues.number,
-      id: persons.length
+      id: persons.length + 1
     }))
    
     setFormValues({
